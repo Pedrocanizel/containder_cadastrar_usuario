@@ -5,8 +5,8 @@ import json
 
 
 def get_connect():
-    con = psycopg2.connect(host='localhost', database='bit_pro',
-                           user='postgres', password='123')
+    con = psycopg2.connect(host='bd.bitgcp.com', database='bitgcp_tables',
+                           user='postgres', password='example')
     return con
 
 
@@ -25,7 +25,7 @@ def insert_lines(data):
     cadastro_criado_em = str(datetime.datetime.now())
 
     cursor = conn.cursor()
-    query = f"""INSERT INTO public.cadastro_usuario (email, name, password, razao_social, sobrenome, idade, cpf, cnpj, telefone, estado, cadastro_criado_em) VALUES ('{email}', '{name}', '{password}', '{razao_social}', '{sobrenome}', '{idade}', '{cpf}', '{cnpj}', '{telefone}' , '{estado}', '{cadastro_criado_em}')"""
+    query = f"""INSERT INTO bitgcp.cadastro_usuario (email, name, password, razao_social, sobrenome, idade, cpf, cnpj, telefone, estado, cadastro_criado_em, id_consulta) VALUES ('{email}', '{name}', '{password}', '{razao_social}', '{sobrenome}', {idade}, '{cpf}', '{cnpj}', '{telefone}' , '{estado}', '{cadastro_criado_em}', '{name}-{email}')"""
     cursor.execute(query)
     conn.commit()
     conn.close()
